@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -27,15 +28,9 @@ Route::prefix('post')->name('post.')->group(function(){
 
 });
 Route::get('/', [PostController::class , 'home'])->name('home');
-
 Route::get('posts/{post:slug}', [PostController::class , 'show']);
 
-Route::get('authors/{author:username}', function (User $author) {
-    return view('posts', [
-        'posts' => $author->posts,
-        'categories' => Category::all(),
+Route::get('register', [RegisterController::class , 'create']);
 
-    ]);
-});
 
 
