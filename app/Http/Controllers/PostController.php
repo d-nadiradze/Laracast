@@ -19,19 +19,17 @@ class PostController extends Controller
 
     public function home()
     {
-
         return view('posts', [
             'posts' => Post::latest()
-                ->filter(request(['search' , 'category','author']))->paginate(6)->withQueryString(),
+                ->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString(),
             'categories' => Category::all(),
-            'currentCategory' => Category::firstWhere('slug' , request('category'))
+            'currentCategory' => Category::firstWhere('slug', request('category'))
 
         ]);
     }
 
     public function show(Post $post)
     {
-
         return view('post', [
             'post' => $post
         ]);
@@ -92,6 +90,7 @@ class PostController extends Controller
         Post::find($id)->delete();
         return redirect()->route('post.index');
     }
+
 
 
 }
